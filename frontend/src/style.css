@@ -1,0 +1,196 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #app {
+  height: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', 'Microsoft YaHei', system-ui, sans-serif;
+  color: #d7e6ee;
+  -webkit-font-smoothing: antialiased;
+  background:
+    radial-gradient(900px 480px at 85% -10%, rgba(0, 229, 255, 0.1), transparent 60%),
+    radial-gradient(800px 460px at 8% 108%, rgba(255, 43, 214, 0.1), transparent 60%),
+    linear-gradient(rgba(0, 229, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.035) 1px, transparent 1px),
+    #05070d;
+  background-size: auto, auto, 44px 44px, 44px 44px, auto;
+  background-attachment: fixed;
+}
+
+/* 扫描线覆盖层 */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.12) 0 1px, transparent 1px 3px);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+a {
+  color: #00e5ff;
+  text-decoration: none;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 229, 255, 0.18);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 229, 255, 0.35);
+  background-clip: padding-box;
+}
+
+.page {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 24px 48px;
+  animation: page-in 0.45s ease both;
+}
+
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-title {
+  font-family: 'Consolas', 'Courier New', monospace;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: 4px;
+  color: #00e5ff;
+  text-shadow:
+    0 0 10px rgba(0, 229, 255, 0.65),
+    0 0 32px rgba(0, 229, 255, 0.3);
+}
+
+.page-sub {
+  color: #7e93a3;
+  margin-bottom: 26px;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.card {
+  position: relative;
+  background: linear-gradient(160deg, rgba(10, 18, 30, 0.85), rgba(6, 10, 18, 0.92));
+  border: 1px solid rgba(0, 229, 255, 0.16);
+  border-radius: 6px;
+  padding: 22px;
+  box-shadow:
+    0 0 24px rgba(0, 229, 255, 0.06),
+    inset 0 0 30px rgba(0, 229, 255, 0.03);
+  backdrop-filter: blur(12px);
+}
+
+/* HUD 角标 */
+.card::before,
+.card::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+.card::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid #00e5ff;
+  border-left: 2px solid #00e5ff;
+  filter: drop-shadow(0 0 4px rgba(0, 229, 255, 0.7));
+}
+.card::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid #ff2bd6;
+  border-right: 2px solid #ff2bd6;
+  filter: drop-shadow(0 0 4px rgba(255, 43, 214, 0.7));
+}
+
+.btn-primary {
+  font-family: 'Consolas', 'Courier New', monospace;
+  background: linear-gradient(135deg, #00b8d4, #7a2bd6);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 11px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.4);
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 28px rgba(122, 43, 214, 0.6);
+}
+
+.btn-primary:active { transform: scale(0.97); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.btn-ghost {
+  font-family: 'Consolas', 'Courier New', monospace;
+  background: rgba(0, 229, 255, 0.04);
+  color: #9fd8e8;
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 4px;
+  padding: 9px 18px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-ghost:hover {
+  border-color: #00e5ff;
+  color: #00e5ff;
+  background: rgba(0, 229, 255, 0.1);
+  box-shadow: 0 0 14px rgba(0, 229, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Element Plus 暗色适配 */
+.el-input__wrapper,
+.el-textarea__inner {
+  background-color: rgba(0, 229, 255, 0.04) !important;
+  box-shadow: 0 0 0 1px rgba(0, 229, 255, 0.2) inset !important;
+}
+.el-input__wrapper.is-focus,
+.el-textarea__inner:focus {
+  box-shadow: 0 0 0 1px #00e5ff inset !important;
+}
+.el-button--primary {
+  background: linear-gradient(135deg, #00b8d4, #7a2bd6) !important;
+  border: none !important;
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.4) !important;
+}
+.el-table {
+  --el-table-bg-color: transparent;
+  --el-table-tr-bg-color: transparent;
+  --el-table-header-bg-color: rgba(0, 229, 255, 0.05);
+  --el-table-row-hover-bg-color: rgba(0, 229, 255, 0.07);
+  --el-table-border-color: rgba(0, 229, 255, 0.1);
+  --el-table-text-color: #b8d4e2;
+  --el-table-header-text-color: #5f8ba0;
+  background: transparent;
+}

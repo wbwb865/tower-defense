@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tdgame.mapper.RecordMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO game_record (user_id, level_id, score, wave, kills, result, duration)
+        VALUES (#{userId}, #{levelId}, #{score}, #{wave}, #{kills}, #{result}, #{duration})
+    </insert>
+
+    <select id="findByUserId" resultType="GameRecord">
+        SELECT r.*, l.name AS level_name
+        FROM game_record r
+        LEFT JOIN level l ON r.level_id = l.id
+        WHERE r.user_id = #{userId}
+        ORDER BY r.created_at DESC
+        LIMIT 50
+    </select>
+
+    <select id="findTop" resultType="GameRecord">
+        SELECT * FROM (
+            SELECT r.*, u.username, l.name AS level_name,
+                   ROW_NUMBER() OVER (PARTITION BY r.user_id, r.level_id
+                                      ORDER BY r.score DESC, r.wave DESC) AS rn
+            FROM game_record r
+            LEFT JOIN user u ON r.user_id = u.id
+            LEFT JOIN level l ON r.level_id = l.id
+            <where>
+                <if test="levelId != null">r.level_id = #{levelId}</if>
+            </where>
+        ) t
+        WHERE t.rn = 1
+        ORDER BY t.score DESC, t.wave DESC
+        LIMIT 50
+    </select>
+
+</mapper>

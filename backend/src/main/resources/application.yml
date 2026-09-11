@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/tower_defense?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: ${MYSQL_PASSWORD:111111}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.tdgame.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+jwt:
+  secret: tower-defense-secret-key-please-change-0123456789abcdef
+  expire-hours: 72
+
+logging:
+  level:
+    com.tdgame.mapper: debug

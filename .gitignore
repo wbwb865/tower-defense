@@ -1,0 +1,22 @@
+# Java 后端构建产物
+backend/target/
+
+# Node 前端依赖与构建产物
+frontend/node_modules/
+frontend/dist/
+
+# 本地工具缓存
+.npm-cache/
+
+# 日志
+*.log
+
+# 本机配置
+maven-settings.xml
+application-local.yml
+
+# IDE / 系统
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
